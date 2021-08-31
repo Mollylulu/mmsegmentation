@@ -210,3 +210,16 @@ class FPN(BaseModule):
                     else:
                         outs.append(self.fpn_convs[i](outs[-1]))
         return tuple(outs)
+
+
+if __name__ == '__main__':
+
+    import torch
+    in_channels = [2, 3, 5, 7]
+    scales = [340, 170, 84, 43]
+    inputs = [torch.rand(1, c, s, s)
+            for c, s in zip(in_channels, scales)]
+    self = FPN(in_channels, 11, len(in_channels)).eval()
+    outputs = self.forward(inputs)
+    for i in range(len(outputs)):
+        print(f'outputs[{i}].shape = {outputs[i].shape}')

@@ -130,7 +130,8 @@ def show_result_pyplot(model,
     img = model.show_result(
         img, result, palette=palette, show=False, opacity=opacity)
     plt.figure(figsize=fig_size)
-    plt.imshow(mmcv.bgr2rgb(img))
-    plt.title(title)
-    plt.tight_layout()
-    plt.show(block=block)
+    plt.savefig("/home/lunaluo/git/mmsegmentation/outputs/demo.png")
+    # plt.imshow(mmcv.bgr2rgb(img))
+    # plt.title(title)
+    # plt.tight_layout()
+    # plt.show(block=block)
