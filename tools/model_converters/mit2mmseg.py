@@ -15,7 +15,7 @@ def convert_mit(ckpt):
     for k, v in ckpt.items():
         if k.startswith('head'):
             continue
-        # patch embedding convertion
+        # patch embedding conversion
         elif k.startswith('patch_embed'):
             
             stage_i = int(k.split('.')[0].replace('patch_embed', ''))
@@ -23,7 +23,7 @@ def convert_mit(ckpt):
             new_v = v
             if 'proj.' in new_k:
                 new_k = new_k.replace('proj.', 'projection.')
-        # transformer encoder layer convertion
+        # transformer encoder layer conversion
         elif k.startswith('block'):
             import pdb;pdb.set_trace()
             stage_i = int(k.split('.')[0].replace('block', ''))
@@ -48,7 +48,7 @@ def convert_mit(ckpt):
                 new_k = new_k.replace('dwconv.dwconv.', '1.')
                 new_k = new_k.replace('fc2.', '4.')
                 string += f'{new_k} {v.shape}-{new_v.shape}'
-        # norm layer convertion
+        # norm layer conversion
         elif k.startswith('norm'):
             stage_i = int(k.split('.')[0].replace('norm', ''))
             new_k = k.replace(f'norm{stage_i}', f'layers.{stage_i-1}.2')
