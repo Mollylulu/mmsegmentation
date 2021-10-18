@@ -10,12 +10,14 @@ from mmcv.runner import CheckpointLoader
 
 def convert_mit(ckpt):
     new_ckpt = OrderedDict()
+    import pdb;pdb.set_trace()
     # Process the concat between q linear weights and kv linear weights
     for k, v in ckpt.items():
         if k.startswith('head'):
             continue
         # patch embedding convertion
         elif k.startswith('patch_embed'):
+            
             stage_i = int(k.split('.')[0].replace('patch_embed', ''))
             new_k = k.replace(f'patch_embed{stage_i}', f'layers.{stage_i-1}.0')
             new_v = v
@@ -23,6 +25,7 @@ def convert_mit(ckpt):
                 new_k = new_k.replace('proj.', 'projection.')
         # transformer encoder layer convertion
         elif k.startswith('block'):
+            import pdb;pdb.set_trace()
             stage_i = int(k.split('.')[0].replace('block', ''))
             new_k = k.replace(f'block{stage_i}', f'layers.{stage_i-1}.1')
             new_v = v
