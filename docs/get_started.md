@@ -11,7 +11,10 @@ The compatible MMSegmentation and MMCV versions are as below. Please install the
 
 | MMSegmentation version |    MMCV version     |
 |:-------------------:|:-------------------:|
-| master              | mmcv-full>=1.3.7, <1.4.0 |
+| master              | mmcv-full>=1.3.13, <1.5.0 |
+| 0.20.0              | mmcv-full>=1.3.13, <1.5.0 |
+| 0.19.0              | mmcv-full>=1.3.13, <1.4.0 |
+| 0.18.0              | mmcv-full>=1.3.13, <1.4.0 |
 | 0.17.0              | mmcv-full>=1.3.7, <1.4.0 |
 | 0.16.0              | mmcv-full>=1.3.7, <1.4.0 |
 | 0.15.0              | mmcv-full>=1.3.7, <1.4.0 |
@@ -26,8 +29,10 @@ The compatible MMSegmentation and MMCV versions are as below. Please install the
 | 0.7.0               | mmcv-full>=1.1.2, <1.2.0 |
 | 0.6.0               | mmcv-full>=1.1.2, <1.2.0 |
 
-Note: You need to run `pip uninstall mmcv` first if you have mmcv installed.
+:::{note}
+You need to run `pip uninstall mmcv` first if you have mmcv installed.
 If mmcv and mmcv-full are both installed, there will be `ModuleNotFoundError`.
+:::
 
 ## Installation
 
@@ -105,7 +110,7 @@ cd mmsegmentation
 pip install -e .  # or "python setup.py develop"
 ```
 
-Note:
+:::{note}
 
 1. When training or testing models on Windows, please ensure that all the '\\' in paths are replaced with '/'. Add .replace('\\', '/') to your python code wherever path strings occur.
 2. The `version+git_hash` will also be saved in trained models meta, e.g. 0.5.0+c415a2e.
@@ -114,6 +119,7 @@ Note:
    you can install it before installing MMCV.
 5. Some dependencies are optional. Simply running `pip install -e .` will only install the minimum runtime requirements.
    To use optional dependencies like `cityscapessripts`  either install them manually with `pip install -r requirements/optional.txt` or specify desired extras when calling `pip` (e.g. `pip install -e .[optional]`). Valid keys for the extras field are: `all`, `tests`, `build`, and `optional`.
+:::
 
 ### A from-scratch setup script
 
@@ -211,3 +217,21 @@ python demo/image_demo.py demo/demo.jpg configs/pspnet/pspnet_r50-d8_512x1024_40
 ```
 
 A notebook demo can be found in [demo/inference_demo.ipynb](../demo/inference_demo.ipynb).
+
+Now we also provide a demo script to test a single video.
+
+```shell
+wget -O demo/demo.mp4 https://user-images.githubusercontent.com/22089207/144212749-44411ef4-b564-4b37-96d4-04bedec629ab.mp4
+python demo/video_demo.py ${VIDEO_FILE} ${CONFIG_FILE} ${CHECKPOINT_FILE} [--device ${DEVICE_NAME}] [--palette-thr ${PALETTE}] \
+    [--show] [--show-wait-time {SHOW_WAIT_TIME}] [--output-file {OUTPUT_FILE}] [--output-fps {OUTPUT_FPS}] \
+    [--output-height {OUTPUT_HEIGHT}] [--output-width {OUTPUT_WIDTH}] [--opacity {OPACITY}]
+```
+
+Examples:
+
+```shell
+wget -O demo/demo.mp4 https://user-images.githubusercontent.com/22089207/144212749-44411ef4-b564-4b37-96d4-04bedec629ab.mp4
+python demo/video_demo.py demo/demo.mp4 configs/cgnet/cgnet_680x680_60k_cityscapes.py \
+    checkpoints/cgnet_680x680_60k_cityscapes_20201101_110253-4c0b2f2d.pth \
+    --device cuda:0 --palette cityscapes --show
+```

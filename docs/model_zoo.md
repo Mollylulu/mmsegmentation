@@ -129,7 +129,7 @@ Please refer to [CGNet](https://github.com/open-mmlab/mmsegmentation/blob/master
 
 ### Mixed Precision (FP16) Training
 
-Please refer [Mixed Precision (FP16) Training](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/fp16) for details.
+Please refer [Mixed Precision (FP16) Training on BiSeNetV2](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/bisenetv2/bisenetv2_fcn_fp16_4x4_1024x1024_160k_cityscapes.py) for details.
 
 ### U-Net
 
@@ -176,4 +176,6 @@ The training speed is reported as followed, in terms of second per iter (s/iter)
 | [CASILVision](https://github.com/CSAILVision/semantic-segmentation-pytorch) | 1.15           | N/A          |
 | [vedaseg](https://github.com/Media-Smart/vedaseg)                           | 0.95           | 1.25       |
 
-Note: The output stride of DeepLabV3+ is 8.
+:::{note}
+The output stride of DeepLabV3+ is 8.
+:::
