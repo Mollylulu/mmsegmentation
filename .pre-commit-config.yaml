@@ -3,13 +3,8 @@ repos:
     rev: 3.8.3
     hooks:
       - id: flake8
-  - repo: https://github.com/asottile/seed-isort-config
-    rev: v2.2.0
-    hooks:
-      - id: seed-isort-config
-        args: ["--exclude", ".dev"]
-  - repo: https://github.com/timothycrosley/isort
-    rev: 4.3.21
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
     hooks:
       - id: isort
   - repo: https://github.com/pre-commit/mirrors-yapf
@@ -54,3 +49,9 @@ repos:
         language: python
         files: ^configs/.*\.md$
         require_serial: true
+  - repo: https://github.com/open-mmlab/pre-commit-hooks
+    rev: v0.2.0  # Use the rev to fix revision
+    hooks:
+      - id: check-algo-readme
+      - id: check-copyright
+        args: ["mmseg", "tools", "tests", "demo"]  # the dir_to_check with expected directory to check

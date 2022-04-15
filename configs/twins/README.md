@@ -1,8 +1,10 @@
-# Twins: Revisiting the Design of Spatial Attention in Vision Transformers
+# Twins
+
+[Twins: Revisiting the Design of Spatial Attention in Vision Transformers](https://arxiv.org/pdf/2104.13840.pdf)
 
 ## Introduction
 
-<!-- [ALGORITHM] -->
+<!-- [BACKBONE] -->
 
 <a href = "https://github.com/Meituan-AutoML/Twins">Official Repo</a>
 
@@ -19,10 +21,9 @@ Very recently, a variety of vision transformer architectures for dense predictio
 <img src="https://user-images.githubusercontent.com/24582831/145021310-57826cf5-5e03-4c7c-9081-ffa744bdae27.png" width="80%"/>
 </div>
 
-<details>
-<summary align = "right"> <a href = "https://arxiv.org/pdf/2104.13840.pdf" >Twins (NeurIPS'2021)</a></summary>
+## Citation
 
-```latex
+```bibtex
 @article{chu2021twins,
   title={Twins: Revisiting spatial attention design in vision transformers},
   author={Chu, Xiangxiang and Tian, Zhi and Wang, Yuqing and Zhang, Bo and Ren, Haibing and Wei, Xiaolin and Xia, Huaxia and Shen, Chunhua},
@@ -31,13 +32,11 @@ Very recently, a variety of vision transformer architectures for dense predictio
 }
 ```
 
-</details>
-
 ## Usage
 
-To use other repositories' pre-trained models, it is necessary to convert keys.
+We have provided pretrained models converted from [official repo](https://github.com/Meituan-AutoML/Twins).
 
-We provide a script [`twins2mmseg.py`](../../tools/model_converters/twins2mmseg.py) in the tools directory to convert the key of models from [the official repo](https://github.com/Meituan-AutoML/Twins) to MMSegmentation style.
+If you want to convert keys on your own to use official repositories' pre-trained models, we also provide a script [`twins2mmseg.py`](../../tools/model_converters/twins2mmseg.py) in the tools directory to convert the key of models from [the official repo](https://github.com/Meituan-AutoML/Twins) to MMSegmentation style.
 
 ```shell
 python tools/model_converters/twins2mmseg.py ${PRETRAIN_PATH} ${STORE_PATH} ${MODEL_TYPE}

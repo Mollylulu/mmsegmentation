@@ -1,8 +1,10 @@
-# Swin Transformer: Hierarchical Vision Transformer using Shifted Windows
+# Swin Transformer
+
+[Swin Transformer: Hierarchical Vision Transformer using Shifted Windows](https://arxiv.org/abs/2103.14030)
 
 ## Introduction
 
-<!-- [ALGORITHM] -->
+<!-- [BACKBONE] -->
 
 <a href="https://github.com/microsoft/Swin-Transformer">Official Repo</a>
 
@@ -19,10 +21,9 @@ This paper presents a new vision Transformer, called Swin Transformer, that capa
 <img src="https://user-images.githubusercontent.com/24582831/142902882-3fb9014c-11b6-47e9-aa14-500dfe7cbb1c.png" width="80%"/>
 </div>
 
-<details>
-<summary align="right"><a href="https://arxiv.org/abs/2103.14030">Swin Transformer (arXiv'2021)</a></summary>
+## Citation
 
-```latex
+```bibtex
 @article{liu2021Swin,
   title={Swin Transformer: Hierarchical Vision Transformer using Shifted Windows},
   author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
@@ -31,13 +32,11 @@ This paper presents a new vision Transformer, called Swin Transformer, that capa
 }
 ```
 
-</details>
-
 ## Usage
 
-To use other repositories' pre-trained models, it is necessary to convert keys.
+We have provided pretrained models converted from [official repo](https://github.com/microsoft/Swin-Transformer)．
 
-We provide a script [`swin2mmseg.py`](../../tools/model_converters/swin2mmseg.py) in the tools directory to convert the key of models from [the official repo](https://github.com/SwinTransformer/Swin-Transformer-Semantic-Segmentation) to MMSegmentation style.
+If you want to convert keys on your own to use official repositories' pre-trained models, we also provide a script [`swin2mmseg.py`](../../tools/model_converters/swin2mmseg.py) in the tools directory to convert the key of models from [the official repo](https://github.com/SwinTransformer/Swin-Transformer-Semantic-Segmentation) to MMSegmentation style.
 
 ```shell
 python tools/model_converters/swin2mmseg.py ${PRETRAIN_PATH} ${STORE_PATH}
@@ -50,6 +49,17 @@ python tools/model_converters/swin2mmseg.py https://github.com/SwinTransformer/s
 ```
 
 This script convert model from `PRETRAIN_PATH` and store the converted model in `STORE_PATH`.
+
+In our default setting, pretrained models and their corresponding [original models](https://github.com/microsoft/Swin-Transforme) models could be defined below:
+
+  | pretrained models | original models |
+  | ------ | -------- |
+  |pretrain/swin_tiny_patch4_window7_224.pth | [swin_tiny_patch4_window7_224.pth](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth) |
+  |pretrain/swin_small_patch4_window7_224.pth | [swin_small_patch4_window7_224.pth](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth) |
+  |pretrain/swin_base_patch4_window7_224.pth | [swin_base_patch4_window7_224.pth](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224.pth) |
+  |pretrain/swin_base_patch4_window7_224_22k.pth | [swin_base_patch4_window7_224_22k.pth](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224_22k.pth) |
+  |pretrain/swin_base_patch4_window12_384.pth | [swin_base_patch4_window12_384.pth](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window12_384.pth) |
+  |pretrain/swin_base_patch4_window12_384_22k.pth | [swin_base_patch4_window12_384_22k.pth](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window12_384_22k.pth) |
 
 ## Results and models
 

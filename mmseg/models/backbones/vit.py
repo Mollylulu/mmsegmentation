@@ -4,11 +4,13 @@ import warnings
 
 import torch
 import torch.nn as nn
+import torch.utils.checkpoint as cp
 from mmcv.cnn import build_norm_layer
 from mmcv.cnn.bricks.transformer import FFN, MultiheadAttention
 from mmcv.cnn.utils.weight_init import (constant_init, kaiming_init,
                                         trunc_normal_)
-from mmcv.runner import BaseModule, ModuleList, _load_checkpoint
+from mmcv.runner import (BaseModule, CheckpointLoader, ModuleList,
+                         load_state_dict)
 from torch.nn.modules.batchnorm import _BatchNorm
 from torch.nn.modules.utils import _pair as to_2tuple
 
@@ -40,6 +42,8 @@ class TransformerEncoderLayer(BaseModule):
         batch_first (bool): Key, Query and Value are shape of
             (batch, n, embed_dim)
             or (n, batch, embed_dim). Default: True.
+        with_cp (bool): Use checkpoint or not. Using checkpoint will save
+            some memory while slowing down the training speed. Default: False.
     """
 
     def __init__(self,
@@ -53,7 +57,8 @@ class TransformerEncoderLayer(BaseModule):
                  qkv_bias=True,
                  act_cfg=dict(type='GELU'),
                  norm_cfg=dict(type='LN'),
-                 batch_first=True):
+                 batch_first=True,
+                 with_cp=False):
         super(TransformerEncoderLayer, self).__init__()
 
         self.norm1_name, norm1 = build_norm_layer(
@@ -81,6 +86,8 @@ class TransformerEncoderLayer(BaseModule):
             dropout_layer=dict(type='DropPath', drop_prob=drop_path_rate),
             act_cfg=act_cfg)
 
+        self.with_cp = with_cp
+
     @property
     def norm1(self):
         return getattr(self, self.norm1_name)
@@ -90,8 +97,16 @@ class TransformerEncoderLayer(BaseModule):
         return getattr(self, self.norm2_name)
 
     def forward(self, x):
-        x = self.attn(self.norm1(x), identity=x)
-        x = self.ffn(self.norm2(x), identity=x)
+
+        def _inner_forward(x):
+            x = self.attn(self.norm1(x), identity=x)
+            x = self.ffn(self.norm2(x), identity=x)
+            return x
+
+        if self.with_cp and x.requires_grad:
+            x = cp.checkpoint(_inner_forward, x)
+        else:
+            x = _inner_forward(x)
         return x
 
 
@@ -250,6 +265,7 @@ class VisionTransformer(BaseModule):
                     qkv_bias=qkv_bias,
                     act_cfg=act_cfg,
                     norm_cfg=norm_cfg,
+                    with_cp=with_cp,
                     batch_first=True))
 
         self.final_norm = final_norm
@@ -266,7 +282,7 @@ class VisionTransformer(BaseModule):
         if (isinstance(self.init_cfg, dict)
                 and self.init_cfg.get('type') == 'Pretrained'):
             logger = get_root_logger()
-            checkpoint = _load_checkpoint(
+            checkpoint = CheckpointLoader.load_checkpoint(
                 self.init_cfg['checkpoint'], logger=logger, map_location='cpu')
 
             if 'state_dict' in checkpoint:
@@ -287,7 +303,7 @@ class VisionTransformer(BaseModule):
                         (h // self.patch_size, w // self.patch_size),
                         (pos_size, pos_size), self.interpolate_mode)
 
-            self.load_state_dict(state_dict, False)
+            load_state_dict(self, state_dict, strict=False, logger=logger)
         elif self.init_cfg is not None:
             super(VisionTransformer, self).init_weights()
         else:

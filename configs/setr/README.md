@@ -1,4 +1,6 @@
-# Rethinking Semantic Segmentation from a Sequence-to-Sequence Perspective with Transformers
+# SETR
+
+[Rethinking Semantic Segmentation from a Sequence-to-Sequence Perspective with Transformers](https://arxiv.org/abs/2012.15840)
 
 ## Introduction
 
@@ -23,10 +25,9 @@ Most recent semantic segmentation methods adopt a fully-convolutional network (F
 This head has two version head.
 ```
 
-<details>
-<summary align="right"><a href="https://arxiv.org/abs/2012.15840">SETR (CVPR'2021)</a></summary>
+## Citation
 
-```latex
+```bibtex
 @article{zheng2020rethinking,
   title={Rethinking Semantic Segmentation from a Sequence-to-Sequence Perspective with Transformers},
   author={Zheng, Sixiao and Lu, Jiachen and Zhao, Hengshuang and Zhu, Xiatian and Luo, Zekun and Wang, Yabiao and Fu, Yanwei and Feng, Jianfeng and Xiang, Tao and Torr, Philip HS and others},
@@ -35,7 +36,22 @@ This head has two version head.
 }
 ```
 
-</details>
+## Usage
+
+You can download the pretrain from [here](https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-vitjx/jx_vit_large_p16_384-b3be5167.pth). Then you can convert its keys with the script `vit2mmseg.py` in the tools directory.
+
+```shell
+python tools/model_converters/vit2mmseg.py ${PRETRAIN_PATH} ${STORE_PATH}
+```
+
+E.g.
+
+```shell
+python tools/model_converters/vit2mmseg.py \
+jx_vit_large_p16_384-b3be5167.pth pretrain/vit_large_p16.pth
+```
+
+This script convert the model from `PRETRAIN_PATH` and store the converted model in `STORE_PATH`.
 
 ## Results and models
 
@@ -43,15 +59,15 @@ This head has two version head.
 
 | Method | Backbone | Crop Size | Batch Size | Lr schd | Mem (GB) | Inf time (fps) | mIoU  | mIoU(ms+flip) | config                                                                                                                          | download                                                                                                                                                                                                                                                                                                                                                     |
 | ------ | -------- | --------- | ---------- | ------- | -------- | -------------- | ----- | ------------: | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| SETR-Naive | ViT-L | 512x512  | 16          | 160000   | 18.40        | 4.72              | 48.28 |             49.56 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_naive_512x512_160k_b16_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_512x512_160k_b16_ade20k/setr_naive_512x512_160k_b16_ade20k_20210619_191258-061f24f5.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_512x512_160k_b16_ade20k/setr_naive_512x512_160k_b16_ade20k_20210619_191258.log.json)     |
-| SETR-PUP | ViT-L | 512x512  | 16          | 160000   | 19.54        | 4.50              | 48.24 |             49.99 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_pup_512x512_160k_b16_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_512x512_160k_b16_ade20k/setr_pup_512x512_160k_b16_ade20k_20210619_191343-7e0ce826.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_512x512_160k_b16_ade20k/setr_pup_512x512_160k_b16_ade20k_20210619_191343.log.json)     |
-| SETR-MLA | ViT-L | 512x512  | 8           | 160000   | 10.96        | -              | 47.34 |             49.05 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_mla_512x512_160k_b8_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b8_ade20k/setr_mla_512x512_160k_b8_ade20k_20210619_191118-c6d21df0.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b8_ade20k/setr_mla_512x512_160k_b8_ade20k_20210619_191118.log.json)     |
-| SETR-MLA | ViT-L | 512x512  | 16          | 160000   | 17.30        | 5.25              | 47.54 |             49.37 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_mla_512x512_160k_b16_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b16_ade20k/setr_mla_512x512_160k_b16_ade20k_20210619_191057-f9741de7.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b16_ade20k/setr_mla_512x512_160k_b16_ade20k_20210619_191057.log.json)     |
+| SETR Naive | ViT-L | 512x512  | 16          | 160000   | 18.40        | 4.72              | 48.28 |             49.56 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_naive_512x512_160k_b16_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_512x512_160k_b16_ade20k/setr_naive_512x512_160k_b16_ade20k_20210619_191258-061f24f5.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_512x512_160k_b16_ade20k/setr_naive_512x512_160k_b16_ade20k_20210619_191258.log.json)     |
+| SETR PUP | ViT-L | 512x512  | 16          | 160000   | 19.54        | 4.50              | 48.24 |             49.99 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_pup_512x512_160k_b16_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_512x512_160k_b16_ade20k/setr_pup_512x512_160k_b16_ade20k_20210619_191343-7e0ce826.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_512x512_160k_b16_ade20k/setr_pup_512x512_160k_b16_ade20k_20210619_191343.log.json)     |
+| SETR MLA | ViT-L | 512x512  | 8           | 160000   | 10.96        | -              | 47.34 |             49.05 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_mla_512x512_160k_b8_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b8_ade20k/setr_mla_512x512_160k_b8_ade20k_20210619_191118-c6d21df0.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b8_ade20k/setr_mla_512x512_160k_b8_ade20k_20210619_191118.log.json)     |
+| SETR MLA | ViT-L | 512x512  | 16          | 160000   | 17.30        | 5.25              | 47.54 |             49.37 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_mla_512x512_160k_b16_ade20k.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b16_ade20k/setr_mla_512x512_160k_b16_ade20k_20210619_191057-f9741de7.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_512x512_160k_b16_ade20k/setr_mla_512x512_160k_b16_ade20k_20210619_191057.log.json)     |
 
 ### Cityscapes
 
 | Method | Backbone | Crop Size | Batch Size | Lr schd | Mem (GB) | Inf time (fps) | mIoU  | mIoU(ms+flip) | config                                                                                                                          | download                                                                                                                                                                                                                                                                                                                                                     |
 | ------ | -------- | --------- | ---------- | ------- | -------- | -------------- | ----- | ------------: | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| SETR-Naive | ViT-L | 768x768 | 8         | 80000 | 24.06 | 0.39 | 78.10 | 80.22 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_vit-large_naive_8x1_768x768_80k_cityscapes.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_vit-large_8x1_768x768_80k_cityscapes/setr_naive_vit-large_8x1_768x768_80k_cityscapes_20211123_000505-20728e80.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_vit-large_8x1_768x768_80k_cityscapes/setr_naive_vit-large_8x1_768x768_80k_cityscapes_20211123_000505.log.json)     |
-| SETR-PUP | ViT-L | 768x768 | 8         | 80000   | 27.96 | 0.37 | 79.21 | 81.02 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_vit-large_pup_8x1_768x768_80k_cityscapes.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_vit-large_8x1_768x768_80k_cityscapes/setr_pup_vit-large_8x1_768x768_80k_cityscapes_20211122_155115-f6f37b8f.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_vit-large_8x1_768x768_80k_cityscapes/setr_pup_vit-large_8x1_768x768_80k_cityscapes_20211122_155115.log.json)     |
-| SETR-MLA | ViT-L | 768x768 | 8           | 80000 | 24.10 | 0.41 | 77.00 | 79.59 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_vit-large_mla_8x1_768x768_80k_cityscapes.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_vit-large_8x1_768x768_80k_cityscapes/setr_mla_vit-large_8x1_768x768_80k_cityscapes_20211119_101003-7f8dccbe.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_vit-large_8x1_768x768_80k_cityscapes/setr_mla_vit-large_8x1_768x768_80k_cityscapes_20211119_101003.log.json)     |
+| SETR Naive | ViT-L | 768x768 | 8         | 80000 | 24.06 | 0.39 | 78.10 | 80.22 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_vit-large_naive_8x1_768x768_80k_cityscapes.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_vit-large_8x1_768x768_80k_cityscapes/setr_naive_vit-large_8x1_768x768_80k_cityscapes_20211123_000505-20728e80.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_naive_vit-large_8x1_768x768_80k_cityscapes/setr_naive_vit-large_8x1_768x768_80k_cityscapes_20211123_000505.log.json)     |
+| SETR PUP | ViT-L | 768x768 | 8         | 80000   | 27.96 | 0.37 | 79.21 | 81.02 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_vit-large_pup_8x1_768x768_80k_cityscapes.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_vit-large_8x1_768x768_80k_cityscapes/setr_pup_vit-large_8x1_768x768_80k_cityscapes_20211122_155115-f6f37b8f.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_pup_vit-large_8x1_768x768_80k_cityscapes/setr_pup_vit-large_8x1_768x768_80k_cityscapes_20211122_155115.log.json)     |
+| SETR MLA | ViT-L | 768x768 | 8           | 80000 | 24.10 | 0.41 | 77.00 | 79.59 | [config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/setr/setr_vit-large_mla_8x1_768x768_80k_cityscapes.py)  | [model](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_vit-large_8x1_768x768_80k_cityscapes/setr_mla_vit-large_8x1_768x768_80k_cityscapes_20211119_101003-7f8dccbe.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/setr/setr_mla_vit-large_8x1_768x768_80k_cityscapes/setr_mla_vit-large_8x1_768x768_80k_cityscapes_20211119_101003.log.json)     |

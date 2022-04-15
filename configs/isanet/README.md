@@ -1,4 +1,6 @@
-# Interlaced Sparse Self-Attention for Semantic Segmentation
+# ISANet
+
+[Interlaced Sparse Self-Attention for Semantic Segmentation](https://arxiv.org/abs/1907.12273)
 
 ## Introduction
 
@@ -19,18 +21,20 @@ In this paper, we present a so-called interlaced sparse self-attention approach 
 <img src="https://user-images.githubusercontent.com/24582831/142901868-03d80da4-b9c0-4df9-8509-5f684ba9dadc.png" width="80%"/>
 </div>
 
-<details>
-<summary align="right"><a href="https://arxiv.org/abs/1907.12273">ISANet (ArXiv'2019/IJCV'2021)</a></summary>
+## Citation
 
-```
+```bibetex
 @article{huang2019isa,
   title={Interlaced Sparse Self-Attention for Semantic Segmentation},
   author={Huang, Lang and Yuan, Yuhui and Guo, Jianyuan and Zhang, Chao and Chen, Xilin and Wang, Jingdong},
   journal={arXiv preprint arXiv:1907.12273},
   year={2019}
 }
+```
 
 The technical report above is also presented at:
+
+```bibetex
 @article{yuan2021ocnet,
   title={OCNet: Object Context for Semantic Segmentation},
   author={Yuan, Yuhui and Huang, Lang and Guo, Jianyuan and Zhang, Chao and Chen, Xilin and Wang, Jingdong},
@@ -41,8 +45,6 @@ The technical report above is also presented at:
 }
 ```
 
-</details>
-
 ## Results and models
 
 ### Cityscapes
@@ -51,9 +53,9 @@ The technical report above is also presented at:
 | --------|----------|-----------|-----------|--------:|----------|----------------|------:|--------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ISANet | R-50-D8  | 512x1024  |  40000  |  5.869   |  2.91   | 78.49 |   79.44   |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r50-d8_512x1024_40k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_512x1024_40k_cityscapes/isanet_r50-d8_512x1024_40k_cityscapes_20210901_054739-981bd763.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_512x1024_40k_cityscapes/isanet_r50-d8_512x1024_40k_cityscapes_20210901_054739.log.json)                                         |
 | ISANet | R-50-D8  | 512x1024  |  80000  |  5.869  |  2.91          | 78.68 |   80.25   |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r50-d8_512x1024_80k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_512x1024_80k_cityscapes/isanet_r50-d8_512x1024_80k_cityscapes_20210901_074202-89384497.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_512x1024_80k_cityscapes/isanet_r50-d8_512x1024_80k_cityscapes_20210901_074202.log.json)                                         |
-| ISANet | R-50-D8  | 769x769   |  40000  |  6.759   |  1.54          | 78.70 |   80.28      |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r50-d8_769x769_40k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_769x769_40k_cityscapes/isanet_r50-d8_769x769_40k_cityscapes_20210903_050200-4ae7e65b.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_769x769_40k_cityscapes_20210903_050200.log.json)                                         |
+| ISANet | R-50-D8  | 769x769   |  40000  |  6.759   |  1.54          | 78.70 |   80.28      |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r50-d8_769x769_40k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_769x769_40k_cityscapes/isanet_r50-d8_769x769_40k_cityscapes_20210903_050200-4ae7e65b.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_769x769_40k_cityscapes/isanet_r50-d8_769x769_40k_cityscapes_20210903_050200.log.json)                                         |
 | ISANet | R-50-D8  | 769x769   |  80000  |  6.759   |  1.54          | 79.29 |   80.53    |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r50-d8_769x769_80k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_769x769_80k_cityscapes/isanet_r50-d8_769x769_80k_cityscapes_20210903_101126-99b54519.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r50-d8_769x769_80k_cityscapes/isanet_r50-d8_769x769_80k_cityscapes_20210903_101126.log.json)                                         |
-| ISANet | R-101-D8 | 512x1024  |  40000  |  9.425   |  2.35         | 79.58 |   81.05  |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r101-d8_512x1024_40k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_512x1024_40k_cityscapes/isanet_r101-d8_512x1024_40k_cityscapes_20210901_145553-293e6bd6.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet_r101-d8_512x1024_40k_cityscapes/isanet_r101-d8_512x1024_40k_cityscapes_20210901_145553.log.json)                                         |
+| ISANet | R-101-D8 | 512x1024  |  40000  |  9.425   |  2.35         | 79.58 |   81.05  |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r101-d8_512x1024_40k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_512x1024_40k_cityscapes/isanet_r101-d8_512x1024_40k_cityscapes_20210901_145553-293e6bd6.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_512x1024_40k_cityscapes/isanet_r101-d8_512x1024_40k_cityscapes_20210901_145553.log.json)                                         |
 | ISANet | R-101-D8 | 512x1024  |  80000  |  9.425   |  2.35          | 80.32 |  81.58  |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r101-d8_512x1024_80k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_512x1024_80k_cityscapes/isanet_r101-d8_512x1024_80k_cityscapes_20210901_145243-5b99c9b2.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_512x1024_80k_cityscapes/isanet_r101-d8_512x1024_80k_cityscapes_20210901_145243.log.json)                                         |
 | ISANet | R-101-D8 | 769x769   |  40000  |  10.815  |  0.92         | 79.68 |    80.95     |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r101-d8_769x769_40k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_769x769_40k_cityscapes/isanet_r101-d8_769x769_40k_cityscapes_20210903_111320-509e7224.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_769x769_40k_cityscapes/isanet_r101-d8_769x769_40k_cityscapes_20210903_111320.log.json)                                         |
 | ISANet | R-101-D8 | 769x769   |  80000  |  10.815  |  0.92          | 80.61 |   81.59  |[config](https://github.com/open-mmlab/mmsegmentation/blob/master/configs/isanet/isanet_r101-d8_769x769_80k_cityscapes.py)|[model](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_769x769_80k_cityscapes/isanet_r101-d8_769x769_80k_cityscapes_20210903_111319-24f71dfa.pth) &#124; [log](https://download.openmmlab.com/mmsegmentation/v0.5/isanet/isanet_r101-d8_769x769_80k_cityscapes/isanet_r101-d8_769x769_80k_cityscapes_20210903_111319.log.json)                                         |
